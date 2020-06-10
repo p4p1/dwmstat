@@ -1,0 +1,27 @@
+#!/usr/bin/env python3
+# -*- coding: utf-8 -*-
+# Made by papi
+# Created on: Wed 10 Jun 2020 02:05:00 PM CEST
+# status.py
+# Description:
+
+from dwmstat.battery import *
+from dwmstat.dateandtime import *
+from dwmstat.network import *
+from dwmstat.hostname import *
+from dwmstat.sound import *
+
+from subprocess import call
+from time import sleep
+
+bat = Battery()
+time = dateandtime()
+net = Network()
+hos = hostname()
+
+while True:
+    snd = Sound()
+    string = " {} {} {} {} {}".format(str(time), str(bat), str(net), str(snd),
+                                      str(hos))
+    call(["xsetroot", "-name", string])
+    sleep(1)
