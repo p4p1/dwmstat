@@ -5,6 +5,8 @@ A dwm status bar in python customized for my version of dwm with different color
 2. [[Dependancies]]
 3. [[Install]]
 
+[[https://raw.githubusercontent.com/p4p1/dwmstat/master/assets/bar_example1.png][Status bar Example]]
+
 ** Usage
 #+BEGIN_SRC bash
 #[p4p1@dwmstat untracked/]$ dwmstat -h
