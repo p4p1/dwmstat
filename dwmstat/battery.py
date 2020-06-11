@@ -38,6 +38,8 @@ class Battery:
                 fmt += orange(pe)
             else:
                 fmt += str(pe)
+            if pos >= len(self.animation):
+                pos -= len(self.animation) - 1
             fmt += self.animation[pos]
         return fmt
 

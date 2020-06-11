@@ -9,7 +9,7 @@
 import distro
 
 class hostname:
-    def main(self):
+    def main(self, fp):
         dist = distro.id()
         logo = ""
 
@@ -36,7 +36,7 @@ class hostname:
         return ("{} {}".format(logo, fp.read().strip('\n')))
     def __call__(self):
         with open("/etc/hostname", "r") as fp:
-            return (self.main())
+            return (self.main(fp))
     def __str__(self):
         with open("/etc/hostname", "r") as fp:
-            return (self.main())
+            return ("[{}]".format(self.main(fp)))
