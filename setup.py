@@ -21,6 +21,7 @@ setup(name='status',
     packages=['dwmstat'],
     install_requires=[
         'pyalsaaudio',
+        'distro',
     ],
     scripts=['bin/dwmstat'],
     zip_safe=False

@@ -1,11 +1,32 @@
 * README
-A dwm status bar in python
+A dwm status bar in python customized for my version of dwm with different colors.
+
 1. [[Usage]]
 2. [[Dependancies]]
 3. [[Install]]
 
- -----
-
-** TODO Usage
-** TODO Dependancies
-** TODO Install
+** Usage
+#+begin_bash
+#[p4p1@dwmstat untracked/]$ dwmstat -h
+Usage: /usr/bin/dwmstat
+Sets the status bar of dwm to a small and precise status bar
+Arguments:
+        -h, --help              The help message
+        -v, --verbose           Display on the terminal the output of the command
+Status output:
+        [Date Time][Battery][Local IP addresse][Volume][Distribution hostname]
+Made by p4p1.
+#+end_bash
+** Install
+To install this status bar you can use pip the python package by downloading the
+repository and running:
+#+begin_python
+$ sudo pip3 install -U .
+#+end_python
+After installation you can add the script to your startup app, if you need the full
+path you can use *whereis*
+** Dependancies
+The dependancies for python should be automatically installed by pip.
+- [ ] pyalsaaudio (pip)
+- [ ] [[https://dwm.suckless.org/patches/statuscolors/][statuscolor]] (dwm)
+- [ ] [[https://dwm.suckless.org/patches/dualstatus/][dualstatus]] (dwm)
