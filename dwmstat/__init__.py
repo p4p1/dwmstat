@@ -11,3 +11,4 @@ from .dateandtime import *
 from .network import *
 from .hostname import *
 from .sound import *
+from .package import *

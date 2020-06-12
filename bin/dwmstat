@@ -10,13 +10,14 @@
 #  -h, --help      Show usage
 #  -t, --time      Set the update time in seconds (default=60sec)
 
-import sys, getopt, signal
+import sys, getopt, signal, os
 
 from dwmstat.battery import *
 from dwmstat.dateandtime import *
 from dwmstat.network import *
 from dwmstat.hostname import *
 from dwmstat.sound import *
+from dwmstat.package import *
 
 from subprocess import call
 from time import sleep
@@ -26,6 +27,7 @@ bat = Battery()
 date = dateandtime()
 net = Network()
 hos = hostname()
+pac = Package()
 
 # Comand line triggers
 verbose = False
@@ -56,10 +58,30 @@ def sighandler(signum, stack):
         print("Received a signal ({}) to update bar".format(signum))
     updatebar()
 
+def package_status():
+    inside = False
+    while True:
+        while pac.is_running():
+            fmt = str(pac)
+            if verbose:
+                print(fmt)
+            call(["xsetroot", "-name", fmt])
+            sleep(2)
+            inside = True
+        if inside:
+            fmt = updatebar()
+            if verbose:
+                print(fmt)
+            inside = False
+        sleep(1)
+
 def main(verbose, time):
     if verbose:
         print("My pid: {}".format(os.getpid()))
     signal.signal(signal.SIGUSR1, sighandler)
+    newpid = os.fork()
+    if newpid == 0:
+        package_status()
     while True:
         fmt = updatebar()
         if verbose:
