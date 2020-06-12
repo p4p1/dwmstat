@@ -26,6 +26,7 @@ Made by p4p1.
 ** Loading bar
 The loading bar is toggled when a package manager is running, currently it does not show progress
 properly and just endlessly cicles but I am looking into changing that soon.
+
 [[https://raw.githubusercontent.com/p4p1/dwmstat/master/assets/loading.png]]
 
 ** Install
@@ -41,3 +42,4 @@ path you can use *whereis*
 The dependancies for python should be automatically installed by pip.
 - pyalsaaudio (pip)
 - [[https://dwm.suckless.org/patches/statuscolors/][statuscolor]] (dwm)
+- [[https://www.nerdfonts.com/][Nerd Font]] (system)
