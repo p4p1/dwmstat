@@ -9,14 +9,14 @@ A dwm status bar in python customized for my version of dwm with different color
 
 ** Usage
 #+BEGIN_SRC bash
-#[p4p1@dwmstat untracked/]$ dwmstat -h
-Usage: /usr/bin/dwmstat
+Usage: dwmstat
 Sets the status bar of dwm to a small and precise status bar
 Arguments:
-        -h, --help              The help message
-        -v, --verbose           Display on the terminal the output of the command
+      -h, --help              The help message
+      -v, --verbose           Display on the terminal the output of the command
+      -t, --time              Set the refresh time in seconds (default: 60)
 Status output:
-        [Date Time][Battery][Local IP addresse][Volume][Distribution hostname]
+      [Date Time][Battery][Local IP addresses][Volume][Distribution hostname]
 Made by p4p1.
 #+END_SRC
 ** Install

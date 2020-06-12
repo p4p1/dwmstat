@@ -2,10 +2,15 @@
 # -*- coding: utf-8 -*-
 # Made by papi
 # Created on: Wed 10 Jun 2020 02:05:00 PM CEST
-# status.py
+# dwmstat
 # Description:
+#  script file for updating the status bar.
+# Usage:
+#  -v, --verbose   Display the status bar on the terminal
+#  -h, --help      Show usage
+#  -t, --time      Set the update time in seconds (default=60sec)
 
-import sys, getopt
+import sys, getopt, signal
 
 from dwmstat.battery import *
 from dwmstat.dateandtime import *
@@ -16,11 +21,15 @@ from dwmstat.sound import *
 from subprocess import call
 from time import sleep
 
+# Modules
 bat = Battery()
-time = dateandtime()
+date = dateandtime()
 net = Network()
 hos = hostname()
+
+# Comand line triggers
 verbose = False
+time = 60
 
 def usage():
     print("Usage: {}".format(sys.argv[0]))
@@ -28,23 +37,39 @@ def usage():
     print("Arguments:")
     print("\t-h, --help\t\tThe help message")
     print("\t-v, --verbose\t\tDisplay on the terminal the output of the command")
+    print("\t-t, --time\t\tSet the refresh time in seconds (default: 60)")
     print("Status output:")
     print("\t[Date Time][Battery][Local IP addresse][Volume][Distribution hostname]")
     print("Made by p4p1.")
 
-def main():
+def updatebar():
+    if verbose:
+        print("Updating status...")
+    snd = Sound()
+    string = " {} {} {} {} {}".format(str(date), str(bat), str(net), str(snd),
+                                      str(hos))
+    call(["xsetroot", "-name", string])
+    return (string)
+
+def sighandler(signum, stack):
+    if verbose:
+        print("Received a signal ({}) to update bar".format(signum))
+    updatebar()
+
+def main(verbose, time):
+    if verbose:
+        print("My pid: {}".format(os.getpid()))
+    signal.signal(signal.SIGUSR1, sighandler)
     while True:
-        snd = Sound()
-        string = " {} {} {} {} {}".format(str(time), str(bat), str(net), str(snd),
-                                          str(hos))
-        call(["xsetroot", "-name", string])
+        fmt = updatebar()
         if verbose:
-            print(string)
-        sleep(1)
+            print(fmt)
+        sleep(time)
 
 if __name__ == "__main__":
     try:
-        opts, args = getopt.getopt(sys.argv[1:], "hv", ["help", "verbose"])
+        opts, args = getopt.getopt(sys.argv[1:], "hvt:", ["help", "verbose",
+                                                          "time"])
     except getopt.GetoptError as err:
         print(str(err))
         usage()
@@ -55,6 +80,8 @@ if __name__ == "__main__":
         elif o in ("-h", "--help"):
             usage()
             sys.exit()
+        elif o in ("-t", "--time"):
+            time = a
         else:
             assert False, "unhandled option"
-    main()
+    main(verbose, time)

@@ -23,6 +23,7 @@ setup(name='status',
         'pyalsaaudio',
         'distro',
     ],
-    scripts=['bin/dwmstat'],
+    scripts=['bin/dwmstat',
+             'bin/sound.sh'],
     zip_safe=False
 )
