@@ -53,12 +53,19 @@ def updatebar():
     call(["xsetroot", "-name", string])
     return (string)
 
-def sighandler(signum, stack):
+def soundhandler(signum, stack):
+    if verbose:
+        print("Received a signal ({}) to update bar".format(signum))
+    updatebar()
+
+def brightnesshandler(signum, stack):
     if verbose:
         print("Received a signal ({}) to update bar".format(signum))
     updatebar()
 
 def package_status():
+    if verbose:
+        print("entering package status updater")
     inside = False
     while True:
         while pac.is_running():
@@ -78,7 +85,8 @@ def package_status():
 def main(verbose, time):
     if verbose:
         print("My pid: {}".format(os.getpid()))
-    signal.signal(signal.SIGUSR1, sighandler)
+    signal.signal(signal.SIGUSR1, soundhandler)
+    signal.signal(signal.SIGUSR2, brightnesshandler)
     newpid = os.fork()
     if newpid == 0:
         package_status()

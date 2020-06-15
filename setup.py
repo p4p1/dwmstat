@@ -10,7 +10,7 @@ with open("README.org", "r") as fh:
     long_description = fh.read()
 
 setup(name='status',
-    version='0.1',
+    version='0.5',
     long_description=long_description,
     long_description_content_type="text/org",
     description='A status bar for dwm',
@@ -24,6 +24,7 @@ setup(name='status',
         'distro',
     ],
     scripts=['bin/dwmstat',
-             'bin/sound.sh'],
+             'bin/sound.sh',
+             'bin/brightness.sh'],
     zip_safe=False
 )
