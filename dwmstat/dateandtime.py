@@ -5,10 +5,12 @@
 # date_time.py
 # Description:
 
-from time import gmtime, strftime
+import datetime
 
 class dateandtime:
     def __call__(self):
-        return (strftime("%d/%m/%Y %H:%M", gmtime()))
+        x = datetime.datetime.now()
+        return (x.strftime("%b %d %Y %H:%M"))
     def __str__(self):
-        return ("[{}]".format(strftime("%d/%m/%Y %H:%M", gmtime())))
+        x = datetime.datetime.now()
+        return ("[{}]".format(x.strftime("%b %d %Y %H:%M")))
