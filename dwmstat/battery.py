@@ -10,11 +10,12 @@ from os import listdir
 from .color import *
 
 class Battery:
-    def __init__(self):
+    def __init__(self, color=True):
         self.directory = "/sys/class/power_supply"
         self.animation = ""
         self.charging_icon = ""
         self.is_plugged = False
+        self.col = color
 
     def __str__(self):
         return "[{}]".format(self.main())
@@ -32,10 +33,13 @@ class Battery:
         with open(self.directory + "/" + fp + "/capacity", "r") as bat:
             pe = int(bat.read().strip("\n"))
             pos = int(len(self.animation) * pe / 100)
-            if pe < 20:
-                fmt += red(pe)
-            elif pe < 45:
-                fmt += orange(pe)
+            if self.col == True:
+                if pe < 20:
+                    fmt += red(pe)
+                elif pe < 45:
+                    fmt += orange(pe)
+                else:
+                    fmt += str(pe)
             else:
                 fmt += str(pe)
             if pos >= len(self.animation):

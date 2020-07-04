@@ -23,7 +23,7 @@ from subprocess import call
 from time import sleep
 
 # Modules
-bat = Battery()
+bat = Battery(False)
 date = dateandtime()
 net = Network()
 hos = hostname()

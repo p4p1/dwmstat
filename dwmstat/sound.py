@@ -12,7 +12,7 @@ class Sound:
     def main(self):
         m = alsaaudio.Mixer()
         if  m.getmute()[0] == 1:
-            return blue("MUTE")
+            return ("  ")
         else:
             return "{}%".format(m.getvolume()[0])
     def __call__(self):
