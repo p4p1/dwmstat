@@ -41,7 +41,10 @@ class Battery:
                 else:
                     fmt += str(pe)
             else:
-                fmt += str(pe)
+                if pe < 20:
+                    fmt += red(pe)
+                else:
+                    fmt += str(pe)
             if pos >= len(self.animation):
                 pos -= len(self.animation) - 1
             fmt += self.animation[pos]
@@ -51,7 +54,10 @@ class Battery:
         fmt = ""
 
         if self.plugged():
-            fmt += "{} ".format(purple(self.charging_icon))
+            if self.col == True:
+                fmt += "{} ".format(purple(self.charging_icon))
+            else:
+                fmt += "{} ".format(self.charging_icon)
         for fp in listdir(self.directory):
             if "AC" in fp:
                 continue

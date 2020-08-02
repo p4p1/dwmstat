@@ -13,9 +13,12 @@ import os
 class Network:
 
     def get_ip_address(self, ifname):
-        s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
-        return socket.inet_ntoa(fcntl.ioctl(s.fileno(), 0x8915,
-            struct.pack('256s', ifname[:15]))[20:24])
+        try:
+            s = socket.socket(socket.AF_INET, socket.SOCK_DGRAM)
+            return socket.inet_ntoa(fcntl.ioctl(s.fileno(), 0x8915,
+                struct.pack('256s', ifname[:15]))[20:24])
+        except:
+            return ""
 
     def __str__(self):
         return ("[{}]".format(self.main()))
