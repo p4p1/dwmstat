@@ -10,11 +10,11 @@ with open("README.org", "r") as fh:
     long_description = fh.read()
 
 setup(name='status',
-    version='0.5',
+    version='1.0',
     long_description=long_description,
     long_description_content_type="text/org",
     description='A status bar for dwm',
-    url='https://leosmith.xyz/',
+    url='https://leosmith.xyz/rice/',
     author='p4p1',
     author_email='p4p1@vivaldi.net',
     license='GPL V3',

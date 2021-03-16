@@ -45,8 +45,11 @@ class Battery:
                     fmt += red(pe)
                 else:
                     fmt += str(pe)
-            if pos >= len(self.animation):
-                pos -= len(self.animation) - 1
+            if pe == 100:
+                pos = 4
+            else:
+                if pos >= len(self.animation):
+                    pos -= len(self.animation) - 1
             fmt += self.animation[pos]
         return fmt
 
