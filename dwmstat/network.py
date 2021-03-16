@@ -31,6 +31,10 @@ class Network:
         for dev in devices:
             if dev == "lo":
                 continue
+            elif "br-" in dev:
+                continue
+            elif "veth" in dev:
+                continue
             else:
                 if i != 0:
                     fmt += " "

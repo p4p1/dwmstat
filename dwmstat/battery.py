@@ -62,7 +62,10 @@ class Battery:
             if "AC" in fp:
                 continue
             else:
-                fmt += self.percentage(fp)
+                try:
+                    fmt += self.percentage(fp)
+                except:
+                    fmt += ""
         return (fmt)
 
 if __name__ == "__main__":
