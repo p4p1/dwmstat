@@ -16,20 +16,22 @@
 #  ./brightness.sh =  -> set brightness to 1
 
 pid=$(ps aux | grep "dwmstat" | head -n1 | awk -F' ' '{print $2}')
-current_display_name=$(xrandr -q | grep ' connected' | head -n 1 | cut -d ' ' -f1)
-current_brightness=$(xrandr --current --verbose | grep "Brightness" | cut -d':' -f2)
+brightness=$(brightnessctl -m | cut -d, -f4 | tr -d '%')
+
 
 if [ "$1" = "+" ]; then
-	brightness=$(echo "$current_brightness + 0.1" | bc)
-	[ ! $brightness = "1.00" ] && xrandr --output $current_display_name --brightness $brightness
+	brightnessctl s +10%
+	notify-send -h int:value:$brightness -h string:synchronous:brightness " Brightness" "${brightness}%"
+
 	kill -s SIGUSR2 $pid
 fi
 if [ "$1" = "-" ]; then
-	brightness=$(echo "$current_brightness - 0.1" | bc)
-	[ ! $brightness = "0" ] && xrandr --output $current_display_name --brightness $brightness
+	brightnessctl s 10%-
+	notify-send -h int:value:$brightness -h string:synchronous:brightness " Brightness" "${brightness}%"
 	kill -s SIGUSR2 $pid
 fi
 if [ "$1" = "=" ]; then
-	xrandr --output $current_display_name --brightness 1
+	brightnessctl s 100%
+	notify-send -h int:value:$brightness -h string:synchronous:brightness " Brightness" "${brightness}%"
 	kill -s SIGUSR2 $pid
 fi

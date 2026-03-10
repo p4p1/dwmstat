@@ -19,10 +19,15 @@ pid=$(ps aux | grep "dwmstat" | head -n1 | awk -F' ' '{print $2}')
 
 if [ "$1" = "-" ]; then
 	amixer set Master 5%- && kill -s SIGUSR1 $pid
+	notify-send -h int:value:$(amixer sget Master | grep -o '[0-9]*%' | head -1 | tr -d '%') -h string:synchronous:volume " Volume" "$(amixer sget Master | grep -o
+'[0-9]*%' | head -1)"
 fi
 if [ "$1" = "+" ]; then
 	amixer set Master 5%+ && kill -s SIGUSR1 $pid
+	notify-send -h int:value:$(amixer sget Master | grep -o '[0-9]*%' | head -1 | tr -d '%') -h string:synchronous:volume " Volume" "$(amixer sget Master | grep -o
+'[0-9]*%' | head -1)"
 fi
 if [ "$1" = "=" ]; then
 	amixer set Master toggle && kill -s SIGUSR1 $pid
+	notify-send -h string:synchronous:volume " Muted"
 fi
