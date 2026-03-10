@@ -21,17 +21,18 @@ brightness=$(brightnessctl -m | cut -d, -f4 | tr -d '%')
 
 if [ "$1" = "+" ]; then
 	brightnessctl s +10%
-	notify-send -h int:value:$brightness -h string:synchronous:brightness " Brightness" "${brightness}%"
 
 	kill -s SIGUSR2 $pid
 fi
 if [ "$1" = "-" ]; then
 	brightnessctl s 10%-
-	notify-send -h int:value:$brightness -h string:synchronous:brightness " Brightness" "${brightness}%"
 	kill -s SIGUSR2 $pid
 fi
 if [ "$1" = "=" ]; then
 	brightnessctl s 100%
-	notify-send -h int:value:$brightness -h string:synchronous:brightness " Brightness" "${brightness}%"
 	kill -s SIGUSR2 $pid
 fi
+notify-send -i "xfpm-brightness-lcd" \
+	-h int:value:$brightness \
+	-h string:synchronous:brightness \
+	"Brightness" "${brightness}%"
